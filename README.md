@@ -1,5 +1,8 @@
 # dsh-zh-thinking
 
+[![npm version](https://img.shields.io/npm/v/dsh-zh-thinking.svg)](https://www.npmjs.com/package/dsh-zh-thinking)
+[![license](https://img.shields.io/npm/l/dsh-zh-thinking.svg)](https://github.com/programerror233/dsh-zh-thinking/blob/main/LICENSE)
+
 让 [DeepSeek Harness](https://github.com/deepseek-ai) 里的模型**用简体中文思考与作答**。
 
 装上之后，所有会话、所有工作区、所有子代理的内部推理（thinking / reasoning 正文）与最终回复都要求使用简体中文书写。热加载立即生效，不需要重启。

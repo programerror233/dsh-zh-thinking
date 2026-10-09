@@ -15,6 +15,15 @@
     "LICENSE"
   ],
   "license": "MIT",
+  "author": "programerror233",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/programerror233/dsh-zh-thinking.git"
+  },
+  "homepage": "https://github.com/programerror233/dsh-zh-thinking#readme",
+  "bugs": {
+    "url": "https://github.com/programerror233/dsh-zh-thinking/issues"
+  },
   "keywords": [
     "deepseek-harness",
     "dsh",
