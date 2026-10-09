@@ -57,6 +57,22 @@ dsh plugin --profile desktop add dsh-zh-thinking
 
 注意 `name` 用 `file:///` 形式的 URL 或相对补丁文件的 `./`、`../` 路径；Windows 裸盘符路径（`C:\...`）会报 `ERR_UNSUPPORTED_ESM_URL_SCHEME`。
 
+### 从手动安装迁移到 npm 安装
+
+**两者不能同时存在。** 它们注册的是同一个 section 名 `zh:reasoning-language`，而 `dsh-system-prompt` 对同一层里的重名 section 会直接抛错：
+
+```text
+prompt section "zh:reasoning-language" is already registered
+```
+
+所以要先移除手动那一段，再执行 `dsh plugin ... add`：
+
+1. 删掉 profile 的 `cordis.patch.yml` 末尾那条 `- insert:`（连同它的 `id`/`name` 两行）；
+2. 如果你用的是 `file:///` 指向本地克隆的写法，那个克隆目录也可以一并删掉；
+3. 然后 `dsh plugin --profile <name> add dsh-zh-thinking`。
+
+如果只是想换一下手动安装的路径，也可以直接改 `name`，但**不要新增第二条 insert**。
+
 ## 配置
 
 全部可选。在 profile 的 `cordis.patch.yml` 里覆盖那一行即可：
@@ -128,6 +144,7 @@ dsh plugin --profile <你的 profile 名> remove dsh-zh-thinking
 
 ## 已知边界
 
+- **同一 section 名只能注册一次**。本插件默认用 `zh:reasoning-language`；若你另外还挂了一个注册同名 section 的插件（比如早先手动装过本插件），`dsh-system-prompt` 会抛 `prompt section "zh:reasoning-language" is already registered`。改用 `config.sectionName` 可以共存，但通常你只想留一个。
 - **只影响此后新产生的推理**。历史消息里已经产生的英文 reasoning 块不会变。
 - **不能强制 100% 中文字符占比**。文件路径、命令、API 名、报错原文按设计保留原始 ASCII 形式。
 - 模型仍可能偶尔夹杂英文短语。这条规则把它压到很低的比例，但不是硬约束——语言生成本质上是概率性的。
